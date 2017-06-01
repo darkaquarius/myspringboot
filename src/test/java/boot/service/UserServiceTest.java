@@ -1,12 +1,14 @@
 package boot.service;
 
 import boot.BaseTest;
+import boot.consts.Jobs;
 import boot.domain.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by huishen on 16/10/10.
+ *
  */
 //@RunWith(SpringJUnit4ClassRunner.class)
 public class UserServiceTest extends BaseTest{
@@ -17,19 +19,25 @@ public class UserServiceTest extends BaseTest{
     @Test
     public void testAddUser(){
         User user= new User();
-        user.setName("asan");
-        user.setPassword("123");
-        user.setAge(21);
-        user.setSex(true);
-        //TODO boolean类型怎么加入数据库
-//        user.setJob(Jobs.TEACHER);
-//        user.setRemark("asansremark");
+        user.setName("wangwu2");
+        user.setPassword("789");
+        user.setAge(30);
+        user.setSex(false);
+        user.setJob(Jobs.EMPLOYEE);
+        user.setRemark("asansremark");
         userService.addUser(user);
     }
 
     @Test
+    public void testUpdateUser() {
+        User user = User.builder().id(9).name("lisi2").password("10").age(31).sex(false).job(Jobs.EMPLOYEE).remark("update").build();
+        userService.updateUser(user);
+        System.out.println(user);
+    }
+
+    @Test
     public void testGetUserById(){
-        User user = userService.getUserById(6);
+        User user = userService.getUserById(9);
         System.out.println(user);
     }
 

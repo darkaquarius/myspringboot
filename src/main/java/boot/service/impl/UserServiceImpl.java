@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -19,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  * Created by huishen on 16/10/8.
  *
  */
-@Service
+// @Service
 public class UserServiceImpl implements UserService {
 
 
@@ -34,16 +33,20 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public int addUser(User user){
-        return userMapper.addUser(user);
+    public User addUser(User user){
+        int row = userMapper.addUser(user);
+       if (0 == row) {
+            throw new RuntimeException("inert error");
+        }
+        return user;
     }
 
     @Override
-    public int updateUser(User user){
+    public User updateUser(User user){
         int row = userMapper.updateUser(user);
         if(0 == row)
             throw new RuntimeException("update error");
-        return row;
+        return user;
     }
 
     @Override

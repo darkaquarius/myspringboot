@@ -1,5 +1,6 @@
 package boot.config;
 
+import boot.consts.Jobs;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -16,14 +17,13 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.EnumOrdinalTypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.ehcache.EhCacheCacheManager;
-import org.springframework.cache.support.CompositeCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -31,8 +31,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -49,8 +47,6 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by huishen on 16/10/8.
@@ -117,28 +113,29 @@ public class SpringConfig {
         return redisTemplate;
     }
 
-    // //使用redis作为Spring缓存抽象机制
-    // @Bean
-    // public CacheManager cacheManager(RedisTemplate redisTemplate) {
-    //     return new RedisCacheManager(redisTemplate);
-    // }
-
-    //使用多个缓存管理器
+    //使用redis作为Spring缓存抽象机制
     @Bean
-    public CacheManager cacheManager(net.sf.ehcache.CacheManager cm, RedisTemplate redisTemplate) {
-        CompositeCacheManager cacheManager = new CompositeCacheManager();
-        List<CacheManager> managers = new ArrayList<CacheManager>();
-        // managers.add(new JCacheCacheManager(jcm));        //javax.cache.CacheManager jcm 在哪里?
-        managers.add(new EhCacheCacheManager(cm));
-        managers.add(new RedisCacheManager(redisTemplate));
-        cacheManager.setCacheManagers(managers);
-        return cacheManager;
+    public CacheManager cacheManager(RedisTemplate redisTemplate) {
+        return new RedisCacheManager(redisTemplate);
     }
+
+    // //使用多个缓存管理器
+    // @Bean
+    // public CacheManager cacheManager(net.sf.ehcache.CacheManager cm, RedisTemplate redisTemplate) {
+    //     CompositeCacheManager cacheManager = new CompositeCacheManager();
+    //     List<CacheManager> managers = new ArrayList<CacheManager>();
+    //     // managers.add(new JCacheCacheManager(jcm));        //javax.cache.CacheManager jcm 在哪里?
+    //     managers.add(new EhCacheCacheManager(cm));
+    //     managers.add(new RedisCacheManager(redisTemplate));
+    //     cacheManager.setCacheManagers(managers);
+    //     return cacheManager;
+    // }
 
     private ObjectMapper getObjectMapper() {
         Jackson2ObjectMapperBuilder builder = Jackson2ObjectMapperBuilder.json();
         builder.timeZone("GMT+8");
         builder.simpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //enum的映射
         builder.featuresToEnable(new Object[]{SerializationFeature.WRITE_ENUMS_USING_INDEX});
         builder.serializationInclusion(JsonInclude.Include.NON_NULL);
         builder.propertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
@@ -168,7 +165,10 @@ public class SpringConfig {
 
     @Bean
     public static Configuration configuration() {
-        return new Configuration();
+        Configuration configuration = new Configuration();
+        //把对应的enum类型和所使用的TypeHandler注册进来
+        configuration.getTypeHandlerRegistry().register(Jobs.class, EnumOrdinalTypeHandler.class);
+        return configuration;
     }
 
     @Bean
@@ -197,16 +197,16 @@ public class SpringConfig {
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource, Configuration configuration) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
-        // sqlSessionFactoryBean.setConfiguration(configuration);
+        sqlSessionFactoryBean.setConfiguration(configuration);
 
         //为了配置ResultMap
-        Resource resource = new ClassPathResource("mybatis-config.xml");
+        // Resource resource = new ClassPathResource("mybatis-config.xml");
         //attention
         // Property 'configuration' and 'configLocation' can not specified with together
-        sqlSessionFactoryBean.setConfigLocation(resource);
-        Resource userMapperResource = new ClassPathResource("mapper/UserMapper.xml");
-        Resource addressMapperResource = new ClassPathResource("mapper/AddressMapper.xml");
-        sqlSessionFactoryBean.setMapperLocations(new Resource[]{userMapperResource, addressMapperResource});
+        // sqlSessionFactoryBean.setConfigLocation(resource);
+        // Resource userMapperResource = new ClassPathResource("mapper/UserMapper.xml");
+        // Resource addressMapperResource = new ClassPathResource("mapper/AddressMapper.xml");
+        // sqlSessionFactoryBean.setMapperLocations(new Resource[]{userMapperResource, addressMapperResource});
         return sqlSessionFactoryBean.getObject();
     }
 

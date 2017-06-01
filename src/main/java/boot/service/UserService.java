@@ -7,9 +7,9 @@ import boot.domain.User;
  */
 public interface UserService {
 
-    int addUser(User user);
+    User addUser(User user);
 
-    int updateUser(User user);
+    User updateUser(User user);
 
     User getUserById(int id);
 

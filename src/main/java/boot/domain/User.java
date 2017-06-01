@@ -1,24 +1,29 @@
 package boot.domain;
 
 import boot.consts.Jobs;
-import lombok.*;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.io.Serializable;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
  * Created by huishen on 16/9/24.
  *
  */
-@Component
 //@ConfigurationProperties(prefix = "user")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements Serializable {
+@Entity
+@Table(name = "user")
+public class User {
 
     @Id
     @GeneratedValue
