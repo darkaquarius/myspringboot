@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Import;
 
 /**
  * Created by huishen on 16/9/24.
+ *
  */
 
 @EnableAutoConfiguration     //启动内置自动配置
