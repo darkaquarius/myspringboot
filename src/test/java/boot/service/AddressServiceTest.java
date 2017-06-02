@@ -2,11 +2,14 @@ package boot.service;
 
 import boot.BaseTest;
 import boot.domain.Address;
+import boot.service.impl.AddressServiceImpl;
 import org.junit.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by huishen on 16/10/13.
+ *
  */
 public class AddressServiceTest extends BaseTest{
 
@@ -26,6 +29,12 @@ public class AddressServiceTest extends BaseTest{
     @Test
     public void testSelectAddress(){
         addressService.selectAddress(1);
+    }
+
+    @Test
+    public void testClazzCast() {
+        AddressServiceImpl instantiate = BeanUtils.instantiate(AddressServiceImpl.class);
+        Address cast = Address.class.cast(instantiate);
     }
 
 }
