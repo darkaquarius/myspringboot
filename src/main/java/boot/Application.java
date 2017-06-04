@@ -22,4 +22,11 @@ public class Application {
         SpringApplication.run(Application.class);
     }
 
+    // public static void main(String[] args) {
+    //     AnnotationConfigApplicationContext context =
+    //         new AnnotationConfigApplicationContext(SpringConfig.class);
+    //     User user = (User) context.getBean(User.class);
+    //     System.out.println(user);
+    // }
+
 }

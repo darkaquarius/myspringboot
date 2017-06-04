@@ -246,4 +246,12 @@ public class SpringConfig {
     //     return new StandardServletMultipartResolver();
     // }
 
+    // //Profile在不同环境下使用不同的配置
+    // @Bean
+    // @Profile({"test"})
+    // public User getUser1() {
+    //     return new User(1);
+    // }
+
+
 }

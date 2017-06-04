@@ -3,7 +3,7 @@
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
       <configuration>
-        <fileset id="fileset" name="Spring Application Context" removed="false">
+        <fileset id="fileset" name="Spring Application Context" removed="false" profiles="dev,test">
           <file>file://$MODULE_DIR$/src/main/java/boot/Application.java</file>
           <file>file://$MODULE_DIR$/src/main/java/boot/config/CachingConfig.java</file>
           <file>file://$MODULE_DIR$/src/main/java/boot/config/SpringConfig.java</file>
