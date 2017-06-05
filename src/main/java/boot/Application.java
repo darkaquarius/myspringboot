@@ -1,10 +1,7 @@
 package boot;
 
-import boot.config.EventConfig;
-import boot.event.DemoPublisher;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -30,12 +27,20 @@ public class Application {
     //     System.out.println(user);
     // }
 
-    //event
-    public static void main(String[] args) {
-        AnnotationConfigApplicationContext context =
-            new AnnotationConfigApplicationContext(EventConfig.class);
-        DemoPublisher publisher = context.getBean(DemoPublisher.class);
-        publisher.publish("hello application event");
-    }
+    // //event
+    // public static void main(String[] args) {
+    //     AnnotationConfigApplicationContext context =
+    //         new AnnotationConfigApplicationContext(EventConfig.class);
+    //     DemoPublisher publisher = context.getBean(DemoPublisher.class);
+    //     publisher.publish("hello application event");
+    // }
+
+    // //aware
+    // public static void main(String[] args) {
+    //     AnnotationConfigApplicationContext context =
+    //         new AnnotationConfigApplicationContext(AwareConfig.class);
+    //     AwareService bean = context.getBean(AwareService.class);
+    //     bean.outputResult();
+    // }
 
 }

@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
-@ComponentScan(basePackages = {"boot.event"})
-public class EventConfig {
+@ComponentScan(basePackages = {"boot.aware"})
+public class AwareConfig {
 }
