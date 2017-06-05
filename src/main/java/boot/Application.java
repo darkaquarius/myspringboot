@@ -1,5 +1,6 @@
 package boot;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +16,9 @@ import org.springframework.context.annotation.Configuration;
 // @Import(SpringConfig.class)
 public class Application {
 
-    // public static void main(String args[]){
-    //     SpringApplication.run(Application.class);
-    // }
+    public static void main(String args[]){
+        SpringApplication.run(Application.class);
+    }
 
     // //@Profile在不同环境下使用不同配置
     // public static void main(String[] args) {

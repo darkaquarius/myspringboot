@@ -1,10 +1,7 @@
 package boot.config;
 
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 
 /**
  * Created by huishen on 17/5/31.
@@ -20,14 +17,14 @@ public class CachingConfig {
     //     return new ConcurrentMapCacheManager();
     // }
 
-    @Bean
-    public EhCacheManagerFactoryBean encache() {
-        EhCacheManagerFactoryBean ehCacheManagerFactoryBean =
-            new EhCacheManagerFactoryBean();
-        ehCacheManagerFactoryBean.setConfigLocation(
-            new ClassPathResource("cache/ehcache.xml"));
-        return ehCacheManagerFactoryBean;
-    }
+    // @Bean
+    // public EhCacheManagerFactoryBean encache() {
+    //     EhCacheManagerFactoryBean ehCacheManagerFactoryBean =
+    //         new EhCacheManagerFactoryBean();
+    //     ehCacheManagerFactoryBean.setConfigLocation(
+    //         new ClassPathResource("cache/ehcache.xml"));
+    //     return ehCacheManagerFactoryBean;
+    // }
 
     // @Bean
     // public EhCacheCacheManager ehcache(net.sf.ehcache.CacheManager cm) {

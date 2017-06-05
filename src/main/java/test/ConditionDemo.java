@@ -7,6 +7,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 
 /**
  * Created by huishen on 17/5/16.
+ *
  */
 public class ConditionDemo implements Condition {
 
