@@ -45,6 +45,12 @@ public class SpELDemo {
     @Value("${redis.host}")
     private String bookName;
 
+    @Value("#{'Hello world'.concat('!')}")
+    private String helloWorld;
+
+    @Value("#{'Hello world'.bytes}")
+    private String helloWorldBytes;
+
     @Autowired
     private Environment environment;
 

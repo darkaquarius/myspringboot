@@ -1,4 +1,4 @@
-package boot.config;
+package boot.aware;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
