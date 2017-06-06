@@ -9,6 +9,7 @@ import boot.domain.User;
 import boot.mapper.UserMapper;
 import boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -48,6 +49,12 @@ public class CachingUserServiceImpl implements UserService {
             throw new RuntimeException("do not find this user in the db!");
         }
         return user;
+    }
+
+    @Override
+    @CacheEvict(value = "user", allEntries = true)
+    public void delAllUserCache() {
+
     }
 
 }

@@ -36,9 +36,14 @@ public class UserServiceTest extends BaseTest{
     }
 
     @Test
-    public void testGetUserById(){
+    public void testGetUserById() {
         User user = userService.getUserById(9);
         System.out.println(user);
+    }
+
+    @Test
+    public void testDelAllUserCache() {
+        userService.delAllUserCache();
     }
 
 }

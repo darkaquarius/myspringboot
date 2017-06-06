@@ -63,6 +63,11 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public void delAllUserCache() {
+        // TODO: 17/6/6
+    }
+
     public void addHashToRedis(User user){
         //chuangqi包
         // Map<String, String> userMap = EntityUtils.beanToHash(user);
