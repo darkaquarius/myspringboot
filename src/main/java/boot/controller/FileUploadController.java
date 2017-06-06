@@ -1,5 +1,6 @@
 package boot.controller;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -37,7 +38,11 @@ public class FileUploadController {
 
                 String fileName = request.getSession().getServletContext().getRealPath("/") + "upload/"
                         + file.getOriginalFilename();
-                file.transferTo(new File(fileName));
+
+                // 2选1
+                // file.transferTo(new File(fileName));
+                FileUtils.writeByteArrayToFile(new File(fileName), file.getBytes());
+
             }catch (Exception e){
                 log.info("upload file error");
             }
