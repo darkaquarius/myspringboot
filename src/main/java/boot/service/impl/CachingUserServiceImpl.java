@@ -28,8 +28,8 @@ public class CachingUserServiceImpl implements UserService {
     @CachePut(value = "user", key = "#result.id.toString()")
     public User addUser(User user) {
         int i = userMapper.addUser(user);
-        throw new RuntimeException("anyway");
-        // return user;
+        // throw new RuntimeException("anyway");
+        return user;
     }
 
     @Override
