@@ -1,4 +1,4 @@
-package boot.aware;
+package boot.annotation;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,20 +6,18 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by huishen on 17/6/5.
+ * Created by huishen on 17/6/6.
  *
  */
-
-@EnableAutoConfiguration     //启动内置自动配置
-@Configuration     //表示Application作为spring的配置文件存在
+@EnableAutoConfiguration
+@Configuration
 @SpringBootApplication
-public class Run {
+public class AnnotationRun {
 
-    //aware
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context =
-            new AnnotationConfigApplicationContext(AwareConfig.class);
-        AwareService bean = context.getBean(AwareService.class);
+            new AnnotationConfigApplicationContext(DemoConfig.class);
+        DemoService bean = context.getBean(DemoService.class);
         bean.outputResult();
     }
 

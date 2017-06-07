@@ -1,4 +1,4 @@
-package boot.taskexecutor;
+package boot.conditional;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,22 +9,20 @@ import org.springframework.context.annotation.Configuration;
  * Created by huishen on 17/6/5.
  *
  */
+
 @EnableAutoConfiguration     //启动内置自动配置
 @Configuration     //表示Application作为spring的配置文件存在
 @SpringBootApplication
-public class Run {
+public class ConditionalRun {
 
-    //async
+    //condition
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context =
-            new AnnotationConfigApplicationContext(TaskExecutorConfig.class);
-        AsyncService asyncService = context.getBean(AsyncService.class);
+            new AnnotationConfigApplicationContext(ConditionConfig.class);
 
-        for (int i = 0; i < 10; i++) {
-            asyncService.executeAsyncTask(i);
-            asyncService.executeAsyncTaskPlus(i);
-        }
-        context.close();
+        ListService listService = context.getBean(ListService.class);
+        String listCmd = listService.showListCmd();
+        System.out.println(listCmd);
     }
 
 }
