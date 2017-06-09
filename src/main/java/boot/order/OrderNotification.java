@@ -1,12 +1,11 @@
 package boot.order;
 
 import lombok.Data;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by huishen on 16/11/1.
+ *
  */
 @Data
 public class OrderNotification {
