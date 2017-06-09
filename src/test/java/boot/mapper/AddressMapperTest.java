@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by huishen on 17/1/13.
+ *
  */
 public class AddressMapperTest {
 
