@@ -36,6 +36,7 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    // http://localhost:8088/user/get_user/8
     @RequestMapping(value = "/get_user/{id}", method =  RequestMethod.GET)
     public User getUserById(@PathVariable("id") int id) throws InvocationTargetException, IllegalAccessException {
         return userService.getUserById(id);

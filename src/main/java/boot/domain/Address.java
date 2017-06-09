@@ -4,16 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by huishen on 16/9/26.
+ *
  */
-@Component
+@Entity
+@Table(name = "address")
 @Data
 @Builder
 @NoArgsConstructor
@@ -27,9 +31,10 @@ public class Address implements Serializable {
     private String country;
     private String province;
     private String city;
-    private User user;
     private Date updateTime;
     private Date createTime;
+
+    private User user;
 
     public Address(Integer id) {this.id = id;}
 }

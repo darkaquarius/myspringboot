@@ -2,6 +2,7 @@ package boot.mapper;
 
 import boot.domain.User;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -31,8 +32,13 @@ public interface UserMapper{
            @Result(column = "age", property = "age", javaType = Integer.class, jdbcType = JdbcType.INTEGER),
            @Result(column = "remark", property = "remark", javaType = String.class, jdbcType = JdbcType.VARCHAR),
            @Result(column="update_time", property="updateTime", javaType = Date.class, jdbcType = JdbcType.DATE),
-           @Result(column="create_time", property="createTime", javaType = Date.class, jdbcType = JdbcType.DATE)})
+           @Result(column="create_time", property="createTime", javaType = Date.class, jdbcType = JdbcType.DATE),
+           @Result(column = "id", property = "addresses", many = @Many(select = "boot.mapper.AddressMapper.selectAddressByUserId"))
+   })
 //     @ResultMap(value = "userResult")
     @Select("select id, name, password, age, sex, job, remark, update_time, create_time from user where id=#{id}")
     User selectByPrimaryKey(int id);
+
+
+
 }

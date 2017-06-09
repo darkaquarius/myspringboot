@@ -23,7 +23,7 @@ public class AddressServiceImpl implements AddressService{
 
     @Override
     public Address selectAddress(int id){
-        Address address = addressMap.selectAddress(id);
+        Address address = addressMap.selectAddressById(id);
         return address;
     }
 

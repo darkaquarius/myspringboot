@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by huishen on 16/9/24.
@@ -37,12 +38,12 @@ public class User {
     private Date updateTime;
     private Date createTime;
 
+    //一端控制多端
+    private List<Address> addresses;
+
     //去掉@Value
     //使用@ConfigurationProperties需要指定prefix,同时bean中的属性和配置参数名保持一致
 //    private String address;
-
-    //一端控制多端
-//    private List<Address> allDetailAddress = new ArrayList<Address>();
 
     public User(Integer id){
         this.id = id;
