@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * Created by huishen on 16/10/10.
  *
@@ -28,6 +30,6 @@ public interface AddressMapper{
     Address find(@Param(value = "city") String city);
 
     @Select("select id, user_id, country, province, city, update_time, create_time from address where user_id = #{userId}")
-    Address selectAddressByUserId(int userId);
+    List<Address> selectAddressByUserId(int userId);
 
 }
