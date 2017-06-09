@@ -9,6 +9,7 @@ import java.io.IOException;
 
 /**
  * Created by huishen on 16/10/9.
+ *
  */
 public class JsonObjectMapper extends ObjectMapper{
     private static final long serialVersionUID = 1L;
