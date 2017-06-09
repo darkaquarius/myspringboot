@@ -175,13 +175,6 @@
             <version>2.5.0</version>
         </dependency>
 
-        <!-- mybatis -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.3.1</version>
-        </dependency>
-
         <!-- jackson -->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
