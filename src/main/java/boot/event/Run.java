@@ -1,8 +1,8 @@
 package boot.event;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -15,12 +15,19 @@ import org.springframework.context.annotation.Configuration;
 @SpringBootApplication
 public class Run {
 
-    //event
-    public static void main(String[] args) {
-        AnnotationConfigApplicationContext context =
-            new AnnotationConfigApplicationContext(EventConfig.class);
-        DemoPublisher publisher = context.getBean(DemoPublisher.class);
-        publisher.publish("hello application event");
+    // //event
+    // public static void main(String[] args) {
+    //     AnnotationConfigApplicationContext context =
+    //         new AnnotationConfigApplicationContext(EventConfig.class);
+    //     DemoPublisher publisher = context.getBean(DemoPublisher.class);
+    //     // publisher.publish("hello application event");
+    // }
+
+    public static void main(String [] args) {
+        SpringApplication application = new SpringApplication(EventConfig.class);
+        application.addListeners(new DemoListener());
+        application.run(args);
     }
+
 
 }

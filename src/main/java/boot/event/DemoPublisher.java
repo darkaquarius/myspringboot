@@ -1,7 +1,7 @@
 package boot.event;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,13 +10,18 @@ import org.springframework.stereotype.Component;
  */
 @Component
 //TODO ApplicationEventPublisherAware来实现
-public class DemoPublisher {
+public class DemoPublisher implements ApplicationEventPublisherAware {
 
-    @Autowired
-    private ApplicationContext context;
+    // @Autowired
+    // private ApplicationContext context;
+    //
+    // public void publish(String msg) {
+    //     context.publishEvent(new DemoEvent(this, msg));
+    // }
 
-    public void publish(String msg) {
-        context.publishEvent(new DemoEvent(this, msg));
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        applicationEventPublisher.publishEvent(new DemoEvent(this, "hello application event"));
     }
 
 }
