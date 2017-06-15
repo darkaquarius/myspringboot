@@ -21,8 +21,7 @@ public class Run {
 
     public static void main(String [] args) {
         SpringApplication application = new SpringApplication(EventConfig.class);
-        application.addListeners(new DemoListener());
-        application.addListeners(new MyApplicationStartedEventListener());
+        application.addListeners(new DemoListener(), new MyApplicationStartedEventListener());
         application.run(args);
     }
 
