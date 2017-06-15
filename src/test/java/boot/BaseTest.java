@@ -9,5 +9,6 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
  *
  */
 @ContextConfiguration(classes = {SpringConfig.class})
+// @SpringApplicationConfiguration(classes = SpringConfig.class)
 public class BaseTest extends AbstractJUnit4SpringContextTests {
 }
