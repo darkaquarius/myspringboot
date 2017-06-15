@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-//TODO ApplicationEventPublisherAware来实现
 public class DemoPublisher implements ApplicationEventPublisherAware {
 
     // @Autowired
