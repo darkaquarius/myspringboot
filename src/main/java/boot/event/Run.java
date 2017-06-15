@@ -1,17 +1,13 @@
 package boot.event;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by huishen on 17/6/5.
  *
  */
 
-@EnableAutoConfiguration     //启动内置自动配置
-@Configuration     //表示Application作为spring的配置文件存在
 @SpringBootApplication
 public class Run {
 
@@ -26,6 +22,7 @@ public class Run {
     public static void main(String [] args) {
         SpringApplication application = new SpringApplication(EventConfig.class);
         application.addListeners(new DemoListener());
+        application.addListeners(new MyApplicationStartedEventListener());
         application.run(args);
     }
 
