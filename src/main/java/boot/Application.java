@@ -20,7 +20,9 @@ public class Application {
 
     public static void main(String args[]){
         SpringApplication.run(Application.class);
-
+        // SpringApplication application = new SpringApplication(Application.class);
+        // application.setBannerMode(Banner.Mode.OFF);
+        // application.run(args);
     }
 
     // //@Profile在不同环境下使用不同配置
