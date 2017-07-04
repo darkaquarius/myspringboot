@@ -32,6 +32,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -39,7 +40,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 import redis.clients.jedis.JedisPoolConfig;
 
 import javax.sql.DataSource;
@@ -47,6 +52,7 @@ import java.beans.PropertyVetoException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 import java.util.TimeZone;
 
 /**
@@ -251,6 +257,58 @@ public class SpringConfig {
     // public User getUser1() {
     //     return new User(1);
     // }
+
+    @Bean
+    public JavaMailSenderImpl mainSender(@Value("${mail.host}") String mailHost,
+                                 @Value("${mail.username}") String mailUsername,
+                                 @Value("${mail.port}") int mailPort,
+                                 @Value("${mail.password}") String mailPassowrd) {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost(mailHost);
+        mailSender.setPort(mailPort);
+        mailSender.setUsername(mailUsername);
+        mailSender.setPassword(mailPassowrd);
+
+        // Properties properties = new Properties();
+        // properties.put("mail.smtp.auth", true);
+        // properties.put("mail.smtp.ssl.enable", true);
+        // properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+        // properties.put("mail.smtp.timeout", 25000);
+        // mailSender.setJavaMailProperties(properties);
+
+        return mailSender;
+    }
+
+    @Bean
+    @Order(1)
+    public ClassLoaderTemplateResolver classLoaderTemplateResolver() {
+        ClassLoaderTemplateResolver resolver =
+            new ClassLoaderTemplateResolver();
+        resolver.setPrefix("mail/");
+        resolver.setTemplateMode("HTML5");
+        resolver.setCharacterEncoding("UTF-8");
+        // setOrder(1);
+        return resolver;
+    }
+
+    // @Bean
+    // @Order(2)
+    // public ServletContextTemplateResolver servletContextTemplateResolver() {
+    //     ServletContextTemplateResolver resolver =
+    //         new ServletContextTemplateResolver();
+    //     resolver.setPrefix("/WEB-INF/mail/");
+    //     resolver.setTemplateMode("HTML5");
+    //     resolver.setCharacterEncoding("UTF-8");
+    //     // setOrder(2);
+    //     return resolver;
+    // }
+
+    @Bean
+    public SpringTemplateEngine springTemplateEngine(Set<ITemplateResolver> resolvers) {
+        SpringTemplateEngine engine = new SpringTemplateEngine();
+        engine.setTemplateResolvers(resolvers);
+        return engine;
+    }
 
 
 }
