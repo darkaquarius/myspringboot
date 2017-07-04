@@ -26,6 +26,7 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
+    // 简单邮件
     @Override
     public void sendSimpleEmail(String to) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -36,6 +37,8 @@ public class EmailServiceImpl implements EmailService {
         mailSender.send(message);
     }
 
+    // 富文本格式(html)
+    // 附件
     @Override
     public void sendEmailWithAttachment(String to) {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
@@ -63,6 +66,7 @@ public class EmailServiceImpl implements EmailService {
         mailSender.send(mimeMessage);
     }
 
+    // 用模板发送邮件
     @Override
     public void sendEmailWithTemplate(String to) {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
