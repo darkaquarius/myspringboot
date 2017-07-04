@@ -30,7 +30,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.cache.RedisCacheManager;
@@ -68,7 +67,6 @@ import java.util.TimeZone;
 public class SpringConfig {
 
     @Bean
-    @Scope
     public JedisPoolConfig poolConfig(
         @Value("${redis.maxIdle}") int maxIdle,
         @Value("${redis.pool.maxTotal}") int maxTotal,
@@ -156,12 +154,15 @@ public class SpringConfig {
         objectMapper.setTimeZone(TimeZone.getDefault());
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
         objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+        // jackson序列化时，默认不带类信息，这里设置序列化时，把类的类型信息带上
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        // enum类型，序列化时，用index
         objectMapper.configure(SerializationFeature.WRITE_ENUMS_USING_INDEX, true);
         return objectMapper;
     }
 
+    // 可以用"${key}"来获取properties文件中的属性
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
@@ -223,6 +224,7 @@ public class SpringConfig {
         return mapperScannerConfigurer;
     }
 
+    // 上传文件
     @Bean
     public StandardServletMultipartResolver setStandardServletMultipartResolver() {
         return new StandardServletMultipartResolver();
@@ -258,6 +260,7 @@ public class SpringConfig {
     //     return new User(1);
     // }
 
+    // 发送邮件
     @Bean
     public JavaMailSenderImpl mainSender(@Value("${mail.host}") String mailHost,
                                  @Value("${mail.username}") String mailUsername,
