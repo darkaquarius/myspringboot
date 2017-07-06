@@ -1,4 +1,4 @@
-package boot.taskexecutor;
+package test.taskexecutor;
 
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,7 +14,7 @@ import java.util.concurrent.Executor;
  *
  */
 @Configuration
-@ComponentScan(basePackages = {"boot.taskexecutor"})
+@ComponentScan(basePackages = {"test.taskexecutor"})
 @EnableAsync
 public class TaskExecutorConfig implements AsyncConfigurer {
 

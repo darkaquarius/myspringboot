@@ -1,4 +1,4 @@
-package boot.event;
+package test.event;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
-@ComponentScan(basePackages = {"boot.event"})
+@ComponentScan(basePackages = {"test.event"})
 public class EventConfig {
 }

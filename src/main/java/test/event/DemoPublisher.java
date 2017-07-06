@@ -1,4 +1,4 @@
-package boot.event;
+package test.event;
 
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;

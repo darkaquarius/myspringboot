@@ -1,4 +1,4 @@
-package boot.aware;
+package test.aware;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.BeanNameAware;

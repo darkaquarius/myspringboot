@@ -1,4 +1,4 @@
-package boot.annotation;
+package test.annotation;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 
 /**
  * Created by huishen on 17/6/6.
- *
+ * 自定义的复合注解
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

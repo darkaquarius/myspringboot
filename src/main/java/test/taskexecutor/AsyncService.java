@@ -1,4 +1,4 @@
-package boot.taskexecutor;
+package test.taskexecutor;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

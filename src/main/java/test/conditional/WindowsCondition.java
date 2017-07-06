@@ -1,4 +1,4 @@
-package boot.conditional;
+package test.conditional;
 
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;

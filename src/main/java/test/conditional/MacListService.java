@@ -1,4 +1,4 @@
-package boot.conditional;
+package test.conditional;
 
 /**
  * Created by huishen on 17/6/5.

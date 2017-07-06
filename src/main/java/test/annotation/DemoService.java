@@ -1,4 +1,4 @@
-package boot.annotation;
+package test.annotation;
 
 import org.springframework.stereotype.Service;
 

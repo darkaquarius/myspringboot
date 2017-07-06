@@ -1,4 +1,4 @@
-package boot.aware;
+package test.aware;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
-@ComponentScan(basePackages = {"boot.aware"})
+@ComponentScan(basePackages = {"test.aware"})
 public class AwareConfig {
 }
