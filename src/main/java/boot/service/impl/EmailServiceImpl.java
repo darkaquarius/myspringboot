@@ -44,7 +44,7 @@ public class EmailServiceImpl implements EmailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = null;
         // 类路径
-        ClassPathResource image = new ClassPathResource("/attachment/attachment.jpg");
+        ClassPathResource image = new ClassPathResource("/static/attachment.jpg");
         // 文件系统
         // FileSystemResource image = new FileSystemResource("/coupon.jpg");
 

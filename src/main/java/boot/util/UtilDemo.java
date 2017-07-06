@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 
 /**
  * Created by huishen on 17/4/21.
+ * 测试static代码块，@Autowired方法，@PostConstruct方法的先后顺序
  */
 @Component
 public class UtilDemo {

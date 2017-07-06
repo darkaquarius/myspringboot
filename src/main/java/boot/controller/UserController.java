@@ -19,6 +19,17 @@ import java.lang.reflect.InvocationTargetException;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    private int perPage = 25;
+
+    public int getPerPage() {
+        return perPage;
+    }
+
+    public void setPerPage(int perPage) {
+        this.perPage = perPage;
+    }
+
     private static Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired

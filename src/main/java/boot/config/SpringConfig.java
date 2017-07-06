@@ -39,9 +39,15 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jmx.export.MBeanExporter;
+import org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource;
+import org.springframework.jmx.export.assembler.MBeanInfoAssembler;
+import org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import redis.clients.jedis.JedisPoolConfig;
@@ -282,6 +288,7 @@ public class SpringConfig {
         return mailSender;
     }
 
+    // 模板解析器
     @Bean
     @Order(1)
     public ClassLoaderTemplateResolver classLoaderTemplateResolver() {
@@ -290,27 +297,82 @@ public class SpringConfig {
         resolver.setPrefix("mail/");
         resolver.setTemplateMode("HTML5");
         resolver.setCharacterEncoding("UTF-8");
-        // setOrder(1);
         return resolver;
     }
 
+    // 模板解析器
     // @Bean
     // @Order(2)
     // public ServletContextTemplateResolver servletContextTemplateResolver() {
     //     ServletContextTemplateResolver resolver =
     //         new ServletContextTemplateResolver();
-    //     resolver.setPrefix("/WEB-INF/mail/");
+    //     resolver.setPrefix("/views/");
+    //     resolver.setSuffix(".html");
     //     resolver.setTemplateMode("HTML5");
     //     resolver.setCharacterEncoding("UTF-8");
-    //     // setOrder(2);
     //     return resolver;
     // }
 
+    // 模板引擎
     @Bean
     public SpringTemplateEngine springTemplateEngine(Set<ITemplateResolver> resolvers) {
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setTemplateResolvers(resolvers);
         return engine;
+    }
+
+    // 视图解析器
+    @Bean
+    public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine);
+        return viewResolver;
+    }
+
+    // MBean
+    // @Bean
+    // public MBeanExporter mBeanExporter(UserController userController,
+    //                                    @Qualifier("assembler") MBeanInfoAssembler assembler) {
+    //     MBeanExporter exporter = new MBeanExporter();
+    //     Map<String, Object> beans = new HashMap<>();
+    //     beans.put("user:name=UserController", userController);
+    //     exporter.setBeans(beans);
+    //     // 指定MBean暴露到哪个MBean服务器
+    //     // exporter.setServer();
+    //     // 配置MBeanInfoAssembler
+    //     exporter.setAssembler(assembler);
+    //     return exporter;
+    // }
+
+    // 限制哪些方法和属性在MBean上暴露
+    // MethodExclusionMBeanInfoAssembler是其反操作，指定了不需要MBean托管的方法
+    // @Bean
+    // public MethodNameBasedMBeanInfoAssembler assembler() {
+    //     MethodNameBasedMBeanInfoAssembler assembler =
+    //         new MethodNameBasedMBeanInfoAssembler();
+    //     assembler.setManagedMethods(new String[]{"getPerPage", "setPerPage"});
+    //     return assembler;
+    // }
+
+    public MBeanExporter mBeanExporter(
+        @Qualifier("metadataMBeanInfoAssembler") MBeanInfoAssembler assembler) {
+        MBeanExporter exporter = new MBeanExporter();
+        exporter.setAssembler(assembler);
+        return exporter;
+    }
+
+    @Bean
+    public MetadataMBeanInfoAssembler metadataMBeanInfoAssembler(
+        @Qualifier("jmxAttributeSource") AnnotationJmxAttributeSource jmxAttributeSource) {
+
+        MetadataMBeanInfoAssembler assembler = new MetadataMBeanInfoAssembler();
+        assembler.setAttributeSource(jmxAttributeSource);
+        return assembler;
+    }
+
+    @Bean
+    public AnnotationJmxAttributeSource jmxAttributeSource() {
+        return new AnnotationJmxAttributeSource();
     }
 
 
