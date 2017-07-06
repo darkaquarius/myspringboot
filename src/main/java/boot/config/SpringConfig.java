@@ -39,10 +39,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.jmx.export.MBeanExporter;
-import org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource;
-import org.springframework.jmx.export.assembler.MBeanInfoAssembler;
-import org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
@@ -68,7 +64,7 @@ import java.util.TimeZone;
 @PropertySource("classpath:app.properties")
 @ComponentScan(basePackages = {"boot.controller", "boot.service.impl", "boot.domain", "boot.order", "boot.util"})
 @MapperScan(basePackages = "boot.mapper")
-@Import({CachingConfig.class})
+@Import({CachingConfig.class, JMXConfig.class})
 @EnableAspectJAutoProxy
 public class SpringConfig {
 
@@ -329,51 +325,9 @@ public class SpringConfig {
         return viewResolver;
     }
 
-    // MBean
-    // @Bean
-    // public MBeanExporter mBeanExporter(UserController userController,
-    //                                    @Qualifier("assembler") MBeanInfoAssembler assembler) {
-    //     MBeanExporter exporter = new MBeanExporter();
-    //     Map<String, Object> beans = new HashMap<>();
-    //     beans.put("user:name=UserController", userController);
-    //     exporter.setBeans(beans);
-    //     // 指定MBean暴露到哪个MBean服务器
-    //     // exporter.setServer();
-    //     // 配置MBeanInfoAssembler
-    //     exporter.setAssembler(assembler);
-    //     return exporter;
-    // }
 
-    // 限制哪些方法和属性在MBean上暴露
-    // MethodExclusionMBeanInfoAssembler是其反操作，指定了不需要MBean托管的方法
-    // @Bean
-    // public MethodNameBasedMBeanInfoAssembler assembler() {
-    //     MethodNameBasedMBeanInfoAssembler assembler =
-    //         new MethodNameBasedMBeanInfoAssembler();
-    //     assembler.setManagedMethods(new String[]{"getPerPage", "setPerPage"});
-    //     return assembler;
-    // }
 
-    public MBeanExporter mBeanExporter(
-        @Qualifier("metadataMBeanInfoAssembler") MBeanInfoAssembler assembler) {
-        MBeanExporter exporter = new MBeanExporter();
-        exporter.setAssembler(assembler);
-        return exporter;
-    }
 
-    @Bean
-    public MetadataMBeanInfoAssembler metadataMBeanInfoAssembler(
-        @Qualifier("jmxAttributeSource") AnnotationJmxAttributeSource jmxAttributeSource) {
-
-        MetadataMBeanInfoAssembler assembler = new MetadataMBeanInfoAssembler();
-        assembler.setAttributeSource(jmxAttributeSource);
-        return assembler;
-    }
-
-    @Bean
-    public AnnotationJmxAttributeSource jmxAttributeSource() {
-        return new AnnotationJmxAttributeSource();
-    }
 
 
 }

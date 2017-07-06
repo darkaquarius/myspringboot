@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Created by huishen on 17/6/5.
- *
+ * 使用@Async注解是异步方法
  */
 @Service
 public class AsyncService {

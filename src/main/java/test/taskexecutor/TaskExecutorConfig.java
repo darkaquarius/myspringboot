@@ -11,7 +11,7 @@ import java.util.concurrent.Executor;
 
 /**
  * Created by huishen on 17/6/5.
- *
+ * 使用@EnableAsync开启异步任务支持
  */
 @Configuration
 @ComponentScan(basePackages = {"test.taskexecutor"})

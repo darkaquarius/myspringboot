@@ -19,17 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/address")
-@ManagedResource(objectName = "address:name=addressController")
+@ManagedResource(objectName = "address:name=addressController")  // JMX
 public class AddressController {
 
     private int perPage = 25;
 
-    @ManagedAttribute
+    @ManagedAttribute   // JMX
     public int getPerPage() {
         return perPage;
     }
 
-    @ManagedAttribute
+    @ManagedAttribute    // JMX
     public void setPerPage(int perPage) {
         this.perPage = perPage;
     }
