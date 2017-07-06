@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by huishen on 16/10/27.
+ * aop的测试类
  */
 @Aspect
 @Component
@@ -17,9 +18,10 @@ public class MyAop {
     private static Logger log = LoggerFactory.getLogger(MyAop.class);
 
     @Pointcut("execution(* boot.controller.*.*(..))")
-    public void myPointcut(){}
+    public void myPointcut(){
 
-//    @Around("execution(* boot.controller.*.*(..))")
+    }
+
 //     @Around(value = "myPointcut()")
     public Object processTX(ProceedingJoinPoint jp) throws Throwable{
         log.info("aop around before method");
@@ -32,6 +34,7 @@ public class MyAop {
         }
     }
 
+    // annotation注解标注的切面
     @Around(value = "@annotation(MyAnnotation)")
     public void func(ProceedingJoinPoint pjp){
         System.out.println(pjp.getTarget());
