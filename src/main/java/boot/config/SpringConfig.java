@@ -1,7 +1,6 @@
 package boot.config;
 
 import boot.consts.Jobs;
-import boot.service.BookService;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -32,7 +31,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -41,13 +39,13 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.remoting.rmi.RmiProxyFactoryBean;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import redis.clients.jedis.JedisPoolConfig;
 
 import javax.sql.DataSource;
@@ -288,28 +286,28 @@ public class SpringConfig {
 
     // 模板解析器
     @Bean
-    @Order(1)
     public ClassLoaderTemplateResolver classLoaderTemplateResolver() {
         ClassLoaderTemplateResolver resolver =
             new ClassLoaderTemplateResolver();
         resolver.setPrefix("mail/");
         resolver.setTemplateMode("HTML5");
         resolver.setCharacterEncoding("UTF-8");
+        resolver.setOrder(1);
         return resolver;
     }
 
     // 模板解析器
-    // @Bean
-    // @Order(2)
-    // public ServletContextTemplateResolver servletContextTemplateResolver() {
-    //     ServletContextTemplateResolver resolver =
-    //         new ServletContextTemplateResolver();
-    //     resolver.setPrefix("/views/");
-    //     resolver.setSuffix(".html");
-    //     resolver.setTemplateMode("HTML5");
-    //     resolver.setCharacterEncoding("UTF-8");
-    //     return resolver;
-    // }
+    @Bean
+    public ServletContextTemplateResolver servletContextTemplateResolver() {
+        ServletContextTemplateResolver resolver =
+            new ServletContextTemplateResolver();
+        resolver.setPrefix("/views/");
+        resolver.setSuffix(".html");
+        resolver.setTemplateMode("HTML5");
+        resolver.setCharacterEncoding("UTF-8");
+        resolver.setOrder(2);
+        return resolver;
+    }
 
     // 模板引擎
     @Bean
@@ -319,7 +317,7 @@ public class SpringConfig {
         return engine;
     }
 
-    // 视图解析器
+    // Thymeleaf视图解析器
     @Bean
     public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
@@ -327,14 +325,14 @@ public class SpringConfig {
         return viewResolver;
     }
 
-    // rmi
-    @Bean
-    public RmiProxyFactoryBean bookService() {
-        RmiProxyFactoryBean rmiProxy = new RmiProxyFactoryBean();
-        rmiProxy.setServiceUrl("rmi://10.0.0.112/bookService");
-        rmiProxy.setServiceInterface(BookService.class);
-        return rmiProxy;
-    }
+    // rmi 这里的10.0.0.112会变化
+    // @Bean
+    // public RmiProxyFactoryBean bookService() {
+    //     RmiProxyFactoryBean rmiProxy = new RmiProxyFactoryBean();
+    //     rmiProxy.setServiceUrl("rmi://10.0.0.112/bookService");
+    //     rmiProxy.setServiceInterface(BookService.class);
+    //     return rmiProxy;
+    // }
 
 
 }

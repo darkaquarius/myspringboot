@@ -7,9 +7,7 @@ import org.springframework.jmx.export.MBeanExporter;
 import org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource;
 import org.springframework.jmx.export.assembler.MBeanInfoAssembler;
 import org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler;
-import org.springframework.jmx.support.ConnectorServerFactoryBean;
 import org.springframework.jmx.support.RegistrationPolicy;
-import org.springframework.remoting.rmi.RmiRegistryFactoryBean;
 
 /**
  * Created by huishen on 17/7/6.
@@ -70,23 +68,23 @@ public class JMXConfig {
         return new AnnotationJmxAttributeSource();
     }
 
-    // 使MBean成为远程对象
-    // ?????????????????
-    @Bean
-    public ConnectorServerFactoryBean connectorServerFactoryBean() {
-        ConnectorServerFactoryBean csfb = new ConnectorServerFactoryBean();
-        csfb.setServiceUrl("service:jmx:rmi://localhost/jndi/rmi://localhost:1099/address");
-        return csfb;
-    }
+    // // 使MBean成为远程对象
+    // // ?????????????????
+    // @Bean
+    // public ConnectorServerFactoryBean connectorServerFactoryBean() {
+    //     ConnectorServerFactoryBean csfb = new ConnectorServerFactoryBean();
+    //     csfb.setServiceUrl("service:jmx:rmi://localhost/jndi/rmi://localhost:1099/address");
+    //     return csfb;
+    // }
 
-    // 启动一个RMI注册表
-    // ???????????????
-    @Bean
-    public RmiRegistryFactoryBean rmiRegistryFactoryBean() {
-        RmiRegistryFactoryBean rrfb = new RmiRegistryFactoryBean();
-        rrfb.setPort(1099);
-        return rrfb;
-    }
+    // // 启动一个RMI注册表
+    // // ???????????????
+    // @Bean
+    // public RmiRegistryFactoryBean rmiRegistryFactoryBean() {
+    //     RmiRegistryFactoryBean rrfb = new RmiRegistryFactoryBean();
+    //     rrfb.setPort(1099);
+    //     return rrfb;
+    // }
 
 
 }

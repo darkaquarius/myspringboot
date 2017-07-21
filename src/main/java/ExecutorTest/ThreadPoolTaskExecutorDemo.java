@@ -13,6 +13,7 @@ import java.util.concurrent.FutureTask;
 
 /**
  * Created by huishen on 17/2/10.
+ *
  */
 public class ThreadPoolTaskExecutorDemo {
 
@@ -25,13 +26,11 @@ public class ThreadPoolTaskExecutorDemo {
         poolTaskExecutor.initialize();
 
         for(int i = 0; i < 100; i++){
-            FutureTask<String> task = new FutureTask<String>(new TaskWithResult(i));
+            FutureTask<String> task = new FutureTask<>(new TaskWithResult(i));
             poolTaskExecutor.submit(task);
             String res = task.get();
             System.out.println(res);
         }
-
-
 
     }
 
