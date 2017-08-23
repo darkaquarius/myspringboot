@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -21,10 +23,17 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContactsText {
+    @Id
+    @GeneratedValue
     private Integer id;
     private Integer userId;
     private String text;
     private Date updateTime;
     private Date createTime;
+
+    public ContactsText(int userId, String text) {
+        this.userId = userId;
+        this.text = text;
+    }
 
 }

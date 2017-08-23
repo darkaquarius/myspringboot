@@ -23,6 +23,7 @@ public class ContactsTextServiceImplTest extends BaseTest {
     public void before() {
         for (int i = 0; i < 200; i++) {
             sb.append("{\"name\":\"张三\",\"tel\":\"13888888888\"}");
+            sb.append("[{\"name\":\"zhangsan\",\"tel\":\"13888888888\"},{\"name\":\"lisi\",\"tel\":\"13888888889\"}]");
         }
     }
 

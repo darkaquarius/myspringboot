@@ -1,13 +1,11 @@
 package boot.mapper;
 
 import boot.BaseTest;
-import boot.domain.Contacts;
 import boot.domain.ContactsText;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
 
 /**
  * Created by huishen on 17/7/27.
