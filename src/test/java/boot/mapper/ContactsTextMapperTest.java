@@ -6,6 +6,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 
 /**
  * Created by huishen on 17/7/27.
@@ -27,6 +30,7 @@ public class ContactsTextMapperTest extends BaseTest {
         ContactsText contactsText = ContactsText.builder()
             .userId(1)
             .text("1")
+            .infoDate(LocalDate.now())
             .build();
 
         int i = contactsTextMapper.addContractsText(contactsText);

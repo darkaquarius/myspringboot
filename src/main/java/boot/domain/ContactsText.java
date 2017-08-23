@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -28,6 +29,7 @@ public class ContactsText {
     private Integer id;
     private Integer userId;
     private String text;
+    private LocalDate infoDate;
     private Date updateTime;
     private Date createTime;
 

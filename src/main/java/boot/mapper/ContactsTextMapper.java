@@ -14,7 +14,7 @@ public interface ContactsTextMapper {
     @Insert("insert into contacts_text(user_id) VALUES (#{userId})")
     int addContractsTextByUserId(int userId);
 
-    @Insert("INSERT INTO contacts_text(user_id, text) VALUES (#{userId}, #{text})")
+    @Insert("INSERT INTO contacts_text(user_id, text, info_date) VALUES (#{userId}, #{text}, #{infoDate})")
     int addContractsText(ContactsText contactsText);
 
     @Select("select * from contacts_text where user_id=#{userId}")
