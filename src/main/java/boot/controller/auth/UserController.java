@@ -1,4 +1,4 @@
-package boot.controller;
+package boot.controller.auth;
 
 import boot.domain.User;
 import org.slf4j.LoggerFactory;

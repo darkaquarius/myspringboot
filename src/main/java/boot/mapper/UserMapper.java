@@ -4,6 +4,7 @@ import boot.domain.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -39,6 +40,7 @@ public interface UserMapper{
     @Select("select id, name, password, age, sex, job, remark, update_time, create_time from user where id=#{id}")
     User selectByPrimaryKey(int id);
 
-
+   @Select("select * from user where name=#{name}")
+    User selectByName(@Param("name") String name);
 
 }

@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     public User addUser(User user){
         int row = userMapper.addUser(user);
        if (0 == row) {
-            throw new RuntimeException("inert error");
+            throw new RuntimeException("insert error");
         }
         return user;
     }
