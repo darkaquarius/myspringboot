@@ -33,4 +33,20 @@ public class Application {
     //     System.out.println(user);
     // }
 
+    // @Bean
+    // public WebMvcConfigurer webMvcConfigurer() {
+    //     return new WebMvcConfigurerAdapter() {
+    //         //设置跨域通过
+    //         @Override
+    //         public void addCorsMappings(CorsRegistry registry) {
+    //             registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "OPTIONS", "PATCH", "DELETE");
+    //         }
+    //
+    //         @Override
+    //         public void addInterceptors(InterceptorRegistry registry) {
+    //             // registry.addInterceptor(new RequestLog());
+    //         }
+    //     };
+    // }
+
 }
