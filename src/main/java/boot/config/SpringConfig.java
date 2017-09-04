@@ -40,6 +40,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -63,7 +64,7 @@ import java.util.TimeZone;
  */
 @org.springframework.context.annotation.Configuration
 @PropertySource("classpath:app.properties")
-@ComponentScan(basePackages = {"boot.controller", "boot.service.impl", "boot.domain", "boot.order", "boot.util"})
+@ComponentScan(basePackages = {"boot.controller", "boot.service.impl", "boot.domain", "boot.order", "boot.util", "boot.config"})
 @MapperScan(basePackages = "boot.mapper")
 @Import({CachingConfig.class, JMXConfig.class})
 @EnableAspectJAutoProxy
@@ -336,10 +337,10 @@ public class SpringConfig {
     //     return rmiProxy;
     // }
 
-    // // 使用HTTP header将请求与session关联
-    // @Bean
-    // public HeaderHttpSessionStrategy headerHttpSessionStrategy() {
-    //     return new HeaderHttpSessionStrategy();
-    // }
+    // 使用HTTP header将请求与session关联
+    @Bean
+    public HeaderHttpSessionStrategy headerHttpSessionStrategy() {
+        return new HeaderHttpSessionStrategy();
+    }
 
 }

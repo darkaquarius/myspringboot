@@ -42,7 +42,7 @@ public class LoginServiceImpl implements LoginService {
         return LoginVo.builder()
             .userId(user.getId())
             .name(user.getName())
-            .token(session.getId())
+            // .token(session.getId())
             .build();
 
     }
