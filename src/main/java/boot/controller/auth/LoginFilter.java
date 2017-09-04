@@ -2,6 +2,7 @@ package boot.controller.auth;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.Filter;
@@ -19,6 +20,7 @@ import java.io.IOException;
  *
  */
 
+@Component
 public class LoginFilter implements Filter {
     private final static Logger logger = LoggerFactory.getLogger(LoginFilter.class);
 
