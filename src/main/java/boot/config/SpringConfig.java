@@ -40,7 +40,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
-import org.springframework.session.web.http.HeaderHttpSessionStrategy;
+import org.springframework.session.web.http.CookieHttpSessionStrategy;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -338,9 +338,14 @@ public class SpringConfig {
     // }
 
     // 使用HTTP header将请求与session关联
+    // @Bean
+    // public HeaderHttpSessionStrategy headerHttpSessionStrategy() {
+    //     return new HeaderHttpSessionStrategy();
+    // }
+
     @Bean
-    public HeaderHttpSessionStrategy headerHttpSessionStrategy() {
-        return new HeaderHttpSessionStrategy();
+    public CookieHttpSessionStrategy cookieHttpSessionStrategy() {
+        return new CookieHttpSessionStrategy();
     }
 
 }

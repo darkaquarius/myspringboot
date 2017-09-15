@@ -69,4 +69,15 @@ public class RedisTest extends BaseTest{
         List list = hashOperations.multiGet("user:hash", keys);
     }
 
+    // 插入1000条数据
+    @Test
+    public void test1() {
+
+        for (int i = 0; i < 1000; i++) {
+            redisTemplate.opsForHash().put("com.loan.muyi", "123456789012", "12356");
+            System.out.println(i);
+
+        }
+    }
+
 }
