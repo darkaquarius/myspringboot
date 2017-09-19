@@ -23,6 +23,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -69,6 +70,7 @@ import java.util.TimeZone;
 @Import({CachingConfig.class, JMXConfig.class})
 @EnableAspectJAutoProxy
 @EnableRedisHttpSession
+@EnableAutoConfiguration
 public class SpringConfig {
 
     @Bean
@@ -177,7 +179,7 @@ public class SpringConfig {
     public static Configuration configuration() {
         Configuration configuration = new Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
-        //把对应的enum类型和所使用的TypeHandler注册进来
+        //把对应的enum类型和所使用的TypeHandler注册进来!!!!!
         configuration.getTypeHandlerRegistry().register(Jobs.class, EnumOrdinalTypeHandler.class);
         return configuration;
     }
