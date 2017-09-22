@@ -350,4 +350,55 @@ public class SpringConfig {
         return new CookieHttpSessionStrategy();
     }
 
+    //    @Bean
+    //    public RedisScript<Boolean> script() {
+    //        DefaultRedisScript<Boolean> redisScript = new DefaultRedisScript<>();
+    //        // redisScript.setScriptSource(new ResourceScriptSource(new ClassPathResource("launch.lua")));
+    //        redisScript.setScriptSource(new StaticScriptSource("local key = KEYS[1];\n" +
+    //                "local nums = redis.call(\"HMGET\", key, \"numLaunch\", \"numExtra\", \"numClick\");\n" +
+    //                "if(tonumber(nums[1]) + tonumber(nums[2]) > tonumber(nums[3]))\n" +
+    //                "    then redis.call('HINCRBY', key, 'numClick', 1);\n" +
+    //                "    return true;\n" +
+    //                "end\n" +
+    //                "return false"));
+    //        redisScript.setResultType(Boolean.class);
+    //        return redisScript;
+    //    }
+    //
+    //    @Bean
+    //    public RedisScript<Long> rateLimitScript() {
+    //        DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();
+    //        redisScript.setScriptSource(new StaticScriptSource("local key = KEYS[1]; if redis.call(\"EXISTS\", key) == 0 " +
+    //                "then redis.call(\"set\", key, 0); redis.call(\"expire\", key, 600); end " +
+    //                "return redis.call(\"incr\", key);"));
+    //        redisScript.setResultType(Long.class);
+    //        return redisScript;
+    //    }
+    //
+    //    @Bean
+    //    public RedisScript<Boolean> sADDNXScript() {
+    //        DefaultRedisScript<Boolean> redisScript = new DefaultRedisScript<>();
+    //        redisScript.setScriptSource(new StaticScriptSource("" +
+    //                " if(redis.call('SCARD',KEYS[1])==0) " +
+    //                " then redis.call('SADD',KEYS[1],unpack(ARGV)) " +
+    //                "      redis.call('expire',KEYS[1],1000*60*20)return true" +
+    //                " end return false"));
+    //        redisScript.setResultType(Boolean.class);
+    //        return redisScript;
+    //    }
+    //
+    //    // incr only if the key exists
+    //    @Bean
+    //    public RedisScript<Long> checkAndIncr() {
+    //        DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>();
+    //        redisScript.setScriptText("" +
+    //                "if redis.call('HEXISTS', KEYS[1], ARGV[1]) == 1 then " +
+    //                "    return redis.call('HINCRBY', KEYS[1], ARGV[1], ARGV[2]) " +
+    //                "else " +
+    //                "    return nil " +
+    //                "end");
+    //        redisScript.setResultType(Long.class);
+    //        return redisScript;
+    //    }
+
 }
