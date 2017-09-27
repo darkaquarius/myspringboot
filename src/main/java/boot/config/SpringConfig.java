@@ -40,8 +40,6 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
-import org.springframework.session.web.http.CookieHttpSessionStrategy;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -69,7 +67,7 @@ import java.util.TimeZone;
 @MapperScan(basePackages = "boot.mapper")
 @Import({CachingConfig.class, JMXConfig.class})
 @EnableAspectJAutoProxy
-@EnableRedisHttpSession
+// @EnableRedisHttpSession
 @EnableAutoConfiguration
 public class SpringConfig {
 
@@ -345,10 +343,11 @@ public class SpringConfig {
     //     return new HeaderHttpSessionStrategy();
     // }
 
-    @Bean
-    public CookieHttpSessionStrategy cookieHttpSessionStrategy() {
-        return new CookieHttpSessionStrategy();
-    }
+    // spring session
+    // @Bean
+    // public CookieHttpSessionStrategy cookieHttpSessionStrategy() {
+    //     return new CookieHttpSessionStrategy();
+    // }
 
     //    @Bean
     //    public RedisScript<Boolean> script() {
