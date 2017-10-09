@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SetOperations;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.ZSetOperations;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +25,9 @@ public class RedisTest extends BaseTest{
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @Test
     public void testOpsForValue(){
@@ -78,6 +83,18 @@ public class RedisTest extends BaseTest{
             System.out.println(i);
 
         }
+    }
+
+    // zset
+    @Test
+    public void test2() {
+        ZSetOperations zSetOperations = stringRedisTemplate.opsForZSet();
+        Set set = zSetOperations.rangeWithScores("test-zset", 0, -1);
+    }
+
+    @Test
+    public void test3() {
+
     }
 
 }

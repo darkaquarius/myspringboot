@@ -35,9 +35,9 @@ public class LoanInfo {
     private Double weight;
     private BigDecimal deposit;    // 存款
     private String description;
-    private List<Contact> contacts;
+    private Contact contact;
     private List<Loan> loans;
-    private List<String> fruits;
+    private List<String> idfas;
     private LocalDateTime createDate;
 
 
