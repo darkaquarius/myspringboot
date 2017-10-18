@@ -94,7 +94,8 @@ public class RedisTest extends BaseTest{
 
     @Test
     public void test3() {
-
+        // todo redisTempdate pipeline
+        // stringRedisTemplate.
     }
 
 }

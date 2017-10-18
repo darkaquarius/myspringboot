@@ -27,7 +27,8 @@ public class ThreadPoolTaskExecutorDemo {
 
         for(int i = 0; i < 100; i++){
             FutureTask<String> task = new FutureTask<>(new TaskWithResult(i));
-            poolTaskExecutor.submit(task);
+            // execute()没有返回值，submit可以有返回值
+            Future<?> submit = poolTaskExecutor.submit(task);
             String res = task.get();
             System.out.println(res);
         }

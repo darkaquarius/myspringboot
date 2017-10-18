@@ -36,8 +36,9 @@ public class CachingUserServiceImpl implements UserService {
     @CachePut(value = "user", key = "#user.id.toString()")
     public User updateUser(User user) {
         int row = userMapper.updateUser(user);
-        if(0 == row)
+        if(0 == row) {
             throw new RuntimeException("update error");
+        }
         return user;
     }
 

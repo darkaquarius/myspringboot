@@ -44,8 +44,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(User user){
         int row = userMapper.updateUser(user);
-        if(0 == row)
+        if(0 == row) {
             throw new RuntimeException("update error");
+        }
         return user;
     }
 

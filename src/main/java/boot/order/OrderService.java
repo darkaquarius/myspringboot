@@ -13,6 +13,7 @@ public class OrderService implements ApplicationEventPublisherAware {
 
     private ApplicationEventPublisher publisher;
 
+    @Override
     public void setApplicationEventPublisher(ApplicationEventPublisher publisher) {
         this.publisher = publisher;
     }
