@@ -3,6 +3,7 @@ package boot.controller;
 import boot.domain.Address;
 import boot.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
@@ -40,14 +41,21 @@ public class AddressController {
     @RequestMapping(path = "/add_address", method = RequestMethod.POST)
     public ResponseEntity addAddress(@RequestBody Address address){
         addressService.addAddress(address);
+
+
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
     // http://localhost:8088/address/get_address/1
     @RequestMapping(path = "/get_address/{id}", method = RequestMethod.GET)
-    public Address getAddressById(@PathVariable("id") int id) {
+    public ResponseEntity<Address> getAddressById(@PathVariable("id") int id) {
         Address address = addressService.selectAddress(id);
-        return address;
+
+        // 返回中增加消息头
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("X-RateLimit-Limit", "60");
+
+        return new ResponseEntity<>(address, responseHeaders, HttpStatus.OK);
     }
 
 }
