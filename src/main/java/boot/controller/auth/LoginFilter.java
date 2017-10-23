@@ -37,7 +37,8 @@ public class LoginFilter implements Filter {
 
         if ("OPTIONS".equals(req.getMethod())
             || path.startsWith("/user/register")
-            || path.startsWith("/login")) {
+            || path.startsWith("/login")
+            || path.startsWith("/mytest")) {
             chain.doFilter(request, response);
             return;
         }

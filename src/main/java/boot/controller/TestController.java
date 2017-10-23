@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by huishen on 17/5/8.
  */
@@ -33,6 +35,16 @@ public class TestController {
     @RequestMapping("/test1")
     public void test1() {
         testService.test1();
+    }
+
+    @RequestMapping(value = "test2")
+    public void test2(HttpServletRequest request) {
+        System.out.println("test2");
+    }
+
+    @RequestMapping(value = "test3")
+    public void test3(HttpServletRequest request) {
+        System.out.println("test3");
     }
 
 }
