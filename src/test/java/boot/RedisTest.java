@@ -4,12 +4,14 @@ import boot.chuangqi.base.EntityUtils;
 import boot.domain.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +23,8 @@ import java.util.concurrent.TimeUnit;
  * Created by huishen on 17/2/22.
  *
  */
+
+@WebAppConfiguration
 public class RedisTest extends BaseTest{
 
     @Autowired
@@ -96,6 +100,20 @@ public class RedisTest extends BaseTest{
     public void test3() {
         // todo redisTempdate pipeline
         // stringRedisTemplate.
+    }
+
+    @Test
+    public void test4() {
+        BoundSetOperations operations = redisTemplate.boundSetOps("mobilePhone");
+
+        long mobilePhone = 10000000000L;
+
+        for (int i = 0; i < 100; i++) {
+            operations.add(mobilePhone);
+            mobilePhone += 1;
+        }
+
+        System.out.println("done");
     }
 
 }
