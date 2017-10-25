@@ -81,9 +81,8 @@ public class RedisTest extends BaseTest{
     // 插入1000条数据
     @Test
     public void test1() {
-
         for (int i = 0; i < 1000; i++) {
-            redisTemplate.opsForHash().put("com.loan.muyi", "123456789012", "12356");
+            stringRedisTemplate.opsForHash().put("com.loan.muyi", "123456789012", "12356");
             System.out.println(i);
 
         }
@@ -104,7 +103,7 @@ public class RedisTest extends BaseTest{
 
     @Test
     public void test4() {
-        BoundSetOperations operations = redisTemplate.boundSetOps("mobilePhone");
+        BoundSetOperations<String, Long> operations = redisTemplate.boundSetOps("mobilePhone");
 
         long mobilePhone = 10000000000L;
 
