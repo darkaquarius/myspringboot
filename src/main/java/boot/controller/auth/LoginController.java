@@ -29,6 +29,8 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    // 对某一个请求处理跨域
+    // @CrossOrigin(origins = "http://localhost:9000")
     @RequestMapping(path = "", method = RequestMethod.POST)
     public LoginVo login(@RequestBody LoginDto loginDto, HttpSession session) {
         LoginVo login = loginService.login(loginDto, session);
