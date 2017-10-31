@@ -4,8 +4,12 @@ import boot.config.SpringConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * Created by huishen on 16/9/24.
@@ -33,20 +37,39 @@ public class Application {
     //     System.out.println(user);
     // }
 
-    // @Bean
-    // public WebMvcConfigurer webMvcConfigurer() {
-    //     return new WebMvcConfigurerAdapter() {
-    //         //设置跨域通过
-    //         @Override
-    //         public void addCorsMappings(CorsRegistry registry) {
-    //             registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "OPTIONS", "PATCH", "DELETE");
-    //         }
-    //
-    //         @Override
-    //         public void addInterceptors(InterceptorRegistry registry) {
-    //             // registry.addInterceptor(new RequestLog());
-    //         }
-    //     };
-    // }
+    @Bean
+    public WebMvcConfigurer webMvcConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            //设置跨域通过
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "OPTIONS", "PATCH", "DELETE");
+
+                // 详细
+                // registry.addMapping("/api/*")
+                //     .allowedOrigins("*")
+                //     // 是否允许发送cookie
+                //     .allowCredentials(false)
+                //     .allowedMethods("GET", "POST", "PUT", "OPTIONS", "PATCH", "DELETE")
+                //     .allowedHeaders("Access-Control-Allow-Origin","Access-Control-Allow-Headers","Access-Control-Allow-Methods"
+                //         ,"Access-Control-Max-Age")
+                //     .exposedHeaders("Access-Control-Allow-Origin")
+                //     .maxAge(3600);
+            }
+
+            // @Override
+            // public void addInterceptors(InterceptorRegistry registry) {
+            //     registry.addInterceptor(getTokenHeader())
+            //         .addPathPatterns("/api/*")
+            //         .excludePathPatterns("/robots.txt");
+            // }
+            //
+            // @Bean
+            // public HandlerInterceptor getTokenHeader() {
+            //     return new HeaderTokenInterceptor();
+            // }
+
+        };
+    }
 
 }
