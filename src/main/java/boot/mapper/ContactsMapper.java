@@ -2,7 +2,9 @@ package boot.mapper;
 
 import boot.domain.Contacts;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -10,6 +12,9 @@ import java.util.List;
  * Created by huishen on 17/7/27.
  *
  */
+
+@Mapper
+@Component
 public interface ContactsMapper {
 
     @Insert("insert into contacts(user_id) VALUES (#{userId})")

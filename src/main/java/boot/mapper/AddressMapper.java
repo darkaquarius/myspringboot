@@ -2,11 +2,13 @@ package boot.mapper;
 
 import boot.domain.Address;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -14,6 +16,9 @@ import java.util.List;
  * Created by huishen on 16/10/10.
  *
  */
+
+@Mapper
+@Component
 public interface AddressMapper{
 
     @Insert("insert into address(user_id, country, province, city) values (#{userId}, #{country}, #{province}, #{city})")

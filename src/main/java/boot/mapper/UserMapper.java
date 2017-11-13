@@ -3,6 +3,7 @@ package boot.mapper;
 import boot.domain.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
@@ -10,6 +11,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.type.JdbcType;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -17,6 +19,9 @@ import java.util.Date;
  * Created by huishen on 16/10/10.
  *
  */
+
+@Mapper
+@Component
 public interface UserMapper{
 
     @Insert("insert into user(name, password, age, sex, job, remark) values (#{name}, #{password}, #{age}, #{sex}, #{job}, #{remark})")

@@ -2,13 +2,17 @@ package boot.mapper;
 
 import boot.domain.ContactsText;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by huishen on 17/7/27.
  *
  */
 
+@Mapper
+@Component
 public interface ContactsTextMapper {
 
     @Insert("insert into contacts_text(user_id) VALUES (#{userId})")
