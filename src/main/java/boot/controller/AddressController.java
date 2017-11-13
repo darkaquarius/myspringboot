@@ -2,6 +2,8 @@ package boot.controller;
 
 import boot.domain.Address;
 import boot.service.AddressService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/address")
 @ManagedResource(objectName = "address:name=addressController")  // JMX
 public class AddressController {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private int perPage = 25;
 
@@ -53,7 +56,7 @@ public class AddressController {
 
         // 返回中增加消息头
         HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.set("X-RateLimit-Limit", "60");
+        responseHeaders.set("custom-header", "60");
 
         return new ResponseEntity<>(address, responseHeaders, HttpStatus.OK);
     }

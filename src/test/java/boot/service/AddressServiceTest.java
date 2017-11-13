@@ -6,11 +6,13 @@ import boot.service.impl.AddressServiceImpl;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  * Created by huishen on 16/10/13.
  *
  */
+@WebAppConfiguration
 public class AddressServiceTest extends BaseTest{
 
     @Autowired
@@ -28,7 +30,7 @@ public class AddressServiceTest extends BaseTest{
 
     @Test
     public void testSelectAddress(){
-        addressService.selectAddress(1);
+        Address address = addressService.selectAddress(1);
     }
 
     @Test
