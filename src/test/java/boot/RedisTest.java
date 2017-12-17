@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 @WebAppConfiguration
-public class RedisTest extends BaseTest{
+public class RedisTest extends BaseTest {
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -114,5 +114,7 @@ public class RedisTest extends BaseTest{
 
         System.out.println("done");
     }
+
+
 
 }

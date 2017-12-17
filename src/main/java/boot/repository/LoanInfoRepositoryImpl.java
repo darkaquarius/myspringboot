@@ -3,12 +3,14 @@ package boot.repository;
 import boot.domain.LoanInfo;
 import com.mongodb.WriteResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by huishen on 17/9/15.
@@ -43,6 +45,21 @@ public class LoanInfoRepositoryImpl implements LoanInfoOperations {
 
         WriteResult upsert = mongoTemplate.upsert(query, update, LoanInfo.class);
         return true;
+    }
+
+    @Override
+    public List<LoanInfo> find(Integer age) {
+        Criteria where = Criteria.where("age").is(30);
+        // todo byExample
+        Query query = new Query(where);
+        query.limit(3);
+        query.with(new Sort(Sort.Direction.DESC, "name"));
+        query.fields().include("_id");
+        query.fields().include("age");
+        query.fields().include("name");
+        query.fields().include("contact");
+
+        return mongoTemplate.find(query, LoanInfo.class);
     }
 
 }

@@ -14,10 +14,20 @@ import java.util.List;
 
 public interface LoanInfoRepository extends MongoRepository<LoanInfo, String>, LoanInfoOperations {
 
+    /**
+     * 根据子文档中的属性来查询
+     * 也可以用findByContact_Name来显性分词
+     */
+    List<LoanInfo> findByContact_Name(String name);
+
+    List<LoanInfo> findByLoansRate(double rate);
+
+    List<LoanInfo> findById(String id);
+
     LoanInfo findByName(String name);
 
     // 根据第一个参数查询
-    @Query(value = "{'name':?0}")
+    @Query(value = "{'name':?0}", fields = "{'name':1,'age':1, '_id':1}")
     LoanInfo findByCustom01(String name);
 
     // 同时满足2个条件 $and
@@ -63,8 +73,6 @@ public interface LoanInfoRepository extends MongoRepository<LoanInfo, String>, L
     // TODO: 17/9/18
     // @Query("{'name':/钱三/i}")
     // List<LoanInfo> findByCustom12();
-
-
 
 
 }

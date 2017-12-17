@@ -36,9 +36,12 @@ public class LoginFilter implements Filter {
         StringBuffer path2 = req.getRequestURL();
 
         if ("OPTIONS".equals(req.getMethod())
+            || path.startsWith("/")
             || path.startsWith("/user/register")
             || path.startsWith("/login")
-            || path.startsWith("/mytest")) {
+            || path.startsWith("/mytest")
+            || path.startsWith("/index")
+            || path.startsWith("/favicon.ico")) {
             chain.doFilter(request, response);
             return;
         }

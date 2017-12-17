@@ -81,12 +81,30 @@ public class LoanInfoRepositoryTest extends BaseTest {
     }
 
     @Test
+    public void testFindByContactName() {
+        List<LoanInfo> loanInfos =
+            loanInfoRepository.findByContact_Name("李四");
+    }
+
+    @Test
+    public void testFindByLoansRate() {
+        List<LoanInfo> loanInfos =
+            loanInfoRepository.findByLoansRate(0.12);
+    }
+
+    @Test
+    public void testFindById() {
+        List<LoanInfo> loanInfos =
+            loanInfoRepository.findById("59cde6c177c8c74df0e17ab9");
+    }
+
+    @Test
     public void testFindAll() {
         List<LoanInfo> all = loanInfoRepository.findAll();
     }
 
     @Test
-    public void testFind() {
+    public void testFindByName() {
         LoanInfo loanInfo = loanInfoRepository.findByName("张三");
     }
 
@@ -150,5 +168,9 @@ public class LoanInfoRepositoryTest extends BaseTest {
     //     List<LoanInfo> loanInfos = loanInfoRepository.findByCustom12();
     // }
 
+    @Test
+    public void testFind() {
+        List<LoanInfo> loanInfos = loanInfoRepository.find(30);
+    }
 
 }

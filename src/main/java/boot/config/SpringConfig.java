@@ -65,7 +65,7 @@ import java.util.TimeZone;
  */
 @org.springframework.context.annotation.Configuration
 @PropertySource("classpath:app.properties")
-@ComponentScan(basePackages = {"boot.controller", "boot.service.impl", "boot.domain", "boot.order", "boot.util", "boot.config"})
+@ComponentScan(basePackages = {"boot.controller", "boot.service", "boot.domain", "boot.order", "boot.util", "boot.config"})
 @MapperScan(basePackages = "boot.mapper")
 @Import({CachingConfig.class, JMXConfig.class})
 @EnableAspectJAutoProxy

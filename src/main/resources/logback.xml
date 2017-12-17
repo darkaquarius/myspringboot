@@ -26,7 +26,8 @@
         </filter>
     </appender>
 
-    <logger name="org.mybatis.spring" level="DEBUG"/>
+    <logger name="boot.mapper" level="DEBUG"/>
+    <logger name="boot.repository" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
