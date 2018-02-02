@@ -11,7 +11,7 @@ import java.util.Random;
  */
 
 @SuppressWarnings("Duplicates")
-public class ValidateCodeUtils {
+public class CaptchaUtil {
 
     // 图片的宽度。
     private static int width = 160;

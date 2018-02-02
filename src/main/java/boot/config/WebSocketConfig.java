@@ -23,7 +23,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/myspringboot-websocket").withSockJS();
+        registry.addEndpoint("/myspringboot-websocket").setAllowedOrigins("*").withSockJS();
     }
 
 }

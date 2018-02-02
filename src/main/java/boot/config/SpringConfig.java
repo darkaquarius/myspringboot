@@ -65,7 +65,8 @@ import java.util.TimeZone;
  */
 @org.springframework.context.annotation.Configuration
 @PropertySource("classpath:app.properties")
-@ComponentScan(basePackages = {"boot.controller", "boot.service", "boot.domain", "boot.order", "boot.util", "boot.config"})
+@ComponentScan(basePackages = {"boot.controller", "boot.service", "boot.domain",
+    "boot.order", "boot.util", "boot.config", "boot.job"})
 @MapperScan(basePackages = "boot.mapper")
 @Import({CachingConfig.class, JMXConfig.class})
 @EnableAspectJAutoProxy
@@ -92,10 +93,12 @@ public class SpringConfig {
     public JedisConnectionFactory jedisConnectionFactory(
         @Value("${redis.host}") String host,
         @Value("${redis.port}") int port,
+        @Value("${redis.database}") int database,
         @Qualifier("poolConfig") JedisPoolConfig poolConfig) {
         JedisConnectionFactory factory = new JedisConnectionFactory();
         factory.setHostName(host);
         factory.setPort(port);
+        factory.setDatabase(database);
         factory.setPoolConfig(poolConfig);
         return factory;
     }

@@ -63,10 +63,10 @@ public class LoanInfoRepositoryTest extends BaseTest {
     @Test
     public void testUpdateFirst() {
         LoanInfo loanInfo = LoanInfo.builder()
-            .name("张三")
+            .name("陈伟1111")
             .age(50)
             .build();
-        loanInfoRepository.updateFirst(loanInfo);
+        boolean b = loanInfoRepository.updateFirst(loanInfo);
     }
 
     @Test
@@ -172,5 +172,21 @@ public class LoanInfoRepositoryTest extends BaseTest {
     public void testFind() {
         List<LoanInfo> loanInfos = loanInfoRepository.find(30);
     }
+
+    @Test
+    public void testSaveByMongoTemplate() {
+        loanInfoRepository.saveByMongoTemplate();
+    }
+
+    @Test
+    public void testBulkOps() {
+        loanInfoRepository.bulkOps();
+    }
+
+    @Test
+    public void updateByMongoTemplate() {
+        loanInfoRepository.updateByMongoTemplate();
+    }
+
 
 }

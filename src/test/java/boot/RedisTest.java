@@ -92,13 +92,19 @@ public class RedisTest extends BaseTest {
     @Test
     public void test2() {
         ZSetOperations zSetOperations = stringRedisTemplate.opsForZSet();
-        Set set = zSetOperations.rangeWithScores("test-zset", 0, -1);
+        Set<ZSetOperations.TypedTuple<String>> set = zSetOperations.rangeWithScores("test-zset", 0, -1);
+        System.out.println(set);
+        for (ZSetOperations.TypedTuple<String> typedTuple : set) {
+            String value = typedTuple.getValue();
+            Double score = typedTuple.getScore();
+            System.out.println(value + "--" + score);
+        }
     }
 
+    // zset
     @Test
     public void test3() {
-        // todo redisTempdate pipeline
-        // stringRedisTemplate.
+
     }
 
     @Test

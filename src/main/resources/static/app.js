@@ -9,18 +9,23 @@ function setConnected(connected) {
     if (connected) {
         $("#conversation").show();
         $("#conversation2").show();
+        //$("#conversation3").show();
     }
     else {
         $("#conversation").hide();
         $("#conversation2").hide();
+        //$("#conversation3").hide();
     }
     $("#greetings").html("");
     $("#auto-send-res").html("");
+    //$("#bitcoins-tickers-res").html("");
 }
 
 function connect() {
     // 1.端口
-    var socket = new SockJS('/myspringboot-websocket');
+    var url = 'http://localhost:8082/myspringboot-websocket';
+    //var url = 'http://localhost:8080/cqbit-api';
+    var socket = new SockJS(url);
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
@@ -28,12 +33,18 @@ function connect() {
         // 2.订阅
         stompClient.subscribe('/topic/greetings', function (greeting) {
             showGreeting(JSON.parse(greeting.body).content);
-        })
+        });
 
-        // auto-send
+         //auto-send
         stompClient.subscribe('/topic/auto-send-res', function(autoSendRes) {
             showAutoSendRes(JSON.parse(autoSendRes.body).content);
-        })
+        });
+
+        // bitcoins-tickers-send
+        //stompClient.subscribe('/topic/tickers', function(tickersRes) {
+        //    showBitcoinsTickersRes(JSON.parse(tickersRes.body).content);
+        //});
+
     });
 }
 
@@ -50,6 +61,14 @@ function sendName() {
     stompClient.send("/app/hello", {}, JSON.stringify({'name' : $("#name").val()}));
 }
 
+function autoSend() {
+    stompClient.send("/app/auto_send");
+}
+
+//function bitcoinsTickersSend() {
+//    stompClient.send("/app/tickers");
+//}
+
 function showGreeting(message) {
     $("#greetings").append("<tr><td>" + message + "</td></tr>");
 }
@@ -58,9 +77,9 @@ function showAutoSendRes(autoSendRes) {
     $("#auto-send-res").append("<tr><td>" + autoSendRes + "</td></tr>");
 }
 
-function autoSend() {
-    stompClient.send("/app/auto_send");
-}
+//function showBitcoinsTickersRes(bitcoinsTickersRes) {
+//    $("#bitcoins-tickers-res").append("<tr><td>" + bitcoinsTickersRes + "</td></tr>");
+//}
 
 $(function () {
     $("form").on('submit', function (e) {
@@ -70,4 +89,5 @@ $(function () {
     $("#disconnect").click(function () { disconnect(); });
     $("#send").click(function () { sendName(); });
     $("#auto-send").click(function () { autoSend(); });
+    //$("#bitcoins-tickers-send").click(function () { bitcoinsTickersSend(); });
 })

@@ -2,7 +2,7 @@ package boot.controller.auth;
 
 import boot.dto.LoginDto;
 import boot.service.LoginService;
-import boot.util.ValidateCodeUtils;
+import boot.util.CaptchaUtil;
 import boot.vo.LoginVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,7 +43,7 @@ public class LoginController {
     @RequestMapping(path = "/valid_code", method = {RequestMethod.POST, RequestMethod.GET})
     public void validCode(HttpServletRequest request, HttpServletResponse response) {
         // 返回一个图片
-        BufferedImage buffImg = ValidateCodeUtils.createCode();
+        BufferedImage buffImg = CaptchaUtil.createCode();
         try {
             response.setContentType("image/png");
             ImageIO.write(buffImg, "png", response.getOutputStream());

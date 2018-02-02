@@ -28,6 +28,7 @@
 
     <logger name="boot.mapper" level="DEBUG"/>
     <logger name="boot.repository" level="DEBUG"/>
+    <logger name="org.springframework.data.mongodb.core.MongoTemplate" level="DEBUG" />
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
