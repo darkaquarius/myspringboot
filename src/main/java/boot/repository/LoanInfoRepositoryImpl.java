@@ -1,21 +1,17 @@
 package boot.repository;
 
 import boot.domain.LoanInfo;
-import com.mongodb.BulkWriteResult;
 import com.mongodb.WriteResult;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.BulkOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-import java.util.Arrays;
 import java.util.List;
 
-import static org.springframework.data.mongodb.core.BulkOperations.BulkMode.ORDERED;
 
 /**
  * Created by huishen on 17/9/15.
@@ -46,7 +42,7 @@ public class LoanInfoRepositoryImpl implements LoanInfoOperations {
         Query query = Query.query(where);
 
         Update update = new Update();
-        update.set("idfas", Arrays.asList("659C9115-15B7-4537-91EC-6621D5AC8C56","EA0A9C93-6ED6-45E8-8F01-E68CD964DCE0"));
+        update.set("idfas", loanInfo.getIdfas());
 
         WriteResult upsert = mongoTemplate.upsert(query, update, LoanInfo.class);
         return true;
@@ -78,24 +74,24 @@ public class LoanInfoRepositoryImpl implements LoanInfoOperations {
         System.out.println(loanInfo);
     }
 
-    @Override
-    public void bulkOps() {
-        LoanInfo loanInfo = LoanInfo.builder()
-            .age(1000)
-            .build();
-        BulkOperations bulkOps = mongoTemplate.bulkOps(ORDERED, LoanInfo.class);
-        // 1. 更新
-        // 根据'_id'来查询
-        Query query = Query.query(Criteria.where("_id").is(new ObjectId("59f9bdab77c89d573def496f")));
-        Update update = new Update();
-        // update.inc("age", 100);
-        update.set("isRich",false);
-        BulkOperations bulkOperations = bulkOps.updateOne(query, update);
-        // 2. 新建
-        BulkOperations insert = bulkOps.insert(loanInfo);
-        BulkWriteResult execute = bulkOps.execute();
-        System.out.println(execute);
-    }
+    // @Override
+    // public void bulkOps() {
+    //     LoanInfo loanInfo = LoanInfo.builder()
+    //         .age(1000)
+    //         .build();
+    //     BulkOperations bulkOps = mongoTemplate.bulkOps(ORDERED, LoanInfo.class);
+    //     // 1. 更新
+    //     // 根据'_id'来查询
+    //     Query query = Query.query(Criteria.where("_id").is(new ObjectId("59f9bdab77c89d573def496f")));
+    //     Update update = new Update();
+    //     // update.inc("age", 100);
+    //     update.set("isRich",false);
+    //     BulkOperations bulkOperations = bulkOps.updateOne(query, update);
+    //     // 2. 新建
+    //     BulkOperations insert = bulkOps.insert(loanInfo);
+    //     BulkWriteResult execute = bulkOps.execute();
+    //     System.out.println(execute);
+    // }
 
     @Override
     public void updateByMongoTemplate() {

@@ -21,7 +21,6 @@ import org.apache.ibatis.type.EnumOrdinalTypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cache.CacheManager;
@@ -34,14 +33,11 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
-import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -49,7 +45,6 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-import redis.clients.jedis.JedisPoolConfig;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -70,41 +65,12 @@ import java.util.TimeZone;
 @MapperScan(basePackages = "boot.mapper")
 @Import({CachingConfig.class, JMXConfig.class})
 @EnableAspectJAutoProxy
-@EnableRedisHttpSession
+// @EnableRedisHttpSession
 @EnableAutoConfiguration
 public class SpringConfig {
 
     @Bean
-    public JedisPoolConfig poolConfig(
-        @Value("${redis.maxIdle}") int maxIdle,
-        @Value("${redis.pool.maxTotal}") int maxTotal,
-        @Value("${redis.maxWaitMillis}") int maxWaitMillis,
-        @Value("${redis.testOnBorrow}") boolean testOnBorrow) {
-
-        JedisPoolConfig config = new JedisPoolConfig();
-        config.setMaxIdle(maxIdle);
-        config.setMaxTotal(maxTotal);
-        config.setMaxWaitMillis(maxWaitMillis);
-        config.setTestOnBorrow(testOnBorrow);
-        return config;
-    }
-
-    @Bean
-    public JedisConnectionFactory jedisConnectionFactory(
-        @Value("${redis.host}") String host,
-        @Value("${redis.port}") int port,
-        @Value("${redis.database}") int database,
-        @Qualifier("poolConfig") JedisPoolConfig poolConfig) {
-        JedisConnectionFactory factory = new JedisConnectionFactory();
-        factory.setHostName(host);
-        factory.setPort(port);
-        factory.setDatabase(database);
-        factory.setPoolConfig(poolConfig);
-        return factory;
-    }
-
-    @Bean
-    public RedisTemplate redisTemplate(@Qualifier("jedisConnectionFactory") RedisConnectionFactory factory) {
+    public RedisTemplate redisTemplate(RedisConnectionFactory factory) {
         RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setConnectionFactory(factory);
         // redisTemplate.setDefaultSerializer(new StringRedisSerializer());
@@ -343,10 +309,10 @@ public class SpringConfig {
     // }
 
     // 使用HTTP header将请求与session关联
-    @Bean
-    public HeaderHttpSessionStrategy headerHttpSessionStrategy() {
-        return new HeaderHttpSessionStrategy();
-    }
+    // @Bean
+    // public HeaderHttpSessionStrategy headerHttpSessionStrategy() {
+    //     return new HeaderHttpSessionStrategy();
+    // }
 
     // spring session
     // @Bean

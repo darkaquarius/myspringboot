@@ -22,7 +22,7 @@ public interface LoanInfoOperations {
 
     void saveByMongoTemplate();
 
-    void bulkOps();
+    // void bulkOps();
 
     void updateByMongoTemplate();
 

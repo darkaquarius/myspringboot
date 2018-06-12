@@ -3,14 +3,13 @@ package boot;
 import boot.service.GetBeanServiceImpl;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  * Created by huishen on 17/11/17.
  *
  */
 
-@WebAppConfiguration
+// @WebAppConfiguration
 public class GetBeanTest extends BaseTest {
 
     @Autowired

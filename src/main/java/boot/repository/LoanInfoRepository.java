@@ -47,8 +47,8 @@ public interface LoanInfoRepository extends MongoRepository<LoanInfo, String>, L
     long findByCustom05(String name, Integer age);
 
     // 返回是否存在满足条件的文档
-    @Query(value = "{$or:[{'name':?0},{'age':?1}]}", exists = true)
-    boolean findByCustom06(String name, Integer age);
+    // @Query(value = "{$or:[{'name':?0},{'age':?1}]}", exists = true)
+    // boolean findByCustom06(String name, Integer age);
 
     // 比较操作符, $lt, $lte, $gt, $gte, $ne
     @Query(value = "{'age':{$gte:50}}")

@@ -75,7 +75,7 @@ public class LoanInfoRepositoryTest extends BaseTest {
             .builder()
             .name("钱三")
             .age(10)
-            .idfas(Arrays.asList("EA3B57AE-227A-4BAF-A539-45BE162584D3", "B87E2B35-2ED1-4E9E-B029-BF955F14B723"))
+            .idfas(Arrays.asList("EA3B57AE-227A-4BAF-A539-45BE162584D0", "B87E2B35-2ED1-4E9E-B029-BF955F14B720"))
             .build();
         loanInfoRepository.upset(loanInfo);
     }
@@ -133,10 +133,10 @@ public class LoanInfoRepositoryTest extends BaseTest {
         long ret = loanInfoRepository.findByCustom05("张三", 30);
     }
 
-    @Test
-    public void testFindByCustom06() {
-        boolean ret = loanInfoRepository.findByCustom06("张三1", 301);
-    }
+    // @Test
+    // public void testFindByCustom06() {
+    //     boolean ret = loanInfoRepository.findByCustom06("张三1", 301);
+    // }
 
     @Test
     public void testFindByCustom07() {
@@ -178,10 +178,10 @@ public class LoanInfoRepositoryTest extends BaseTest {
         loanInfoRepository.saveByMongoTemplate();
     }
 
-    @Test
-    public void testBulkOps() {
-        loanInfoRepository.bulkOps();
-    }
+    // @Test
+    // public void testBulkOps() {
+    //     loanInfoRepository.bulkOps();
+    // }
 
     @Test
     public void updateByMongoTemplate() {

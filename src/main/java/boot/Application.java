@@ -1,5 +1,6 @@
 package boot;
 
+import boot.config.MongoConfig;
 import boot.config.SpringConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -19,7 +20,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableAutoConfiguration     //启动内置自动配置
 @Configuration     //表示Application作为spring的配置文件在
 @SpringBootApplication
-@Import(SpringConfig.class)
+@Import({SpringConfig.class, MongoConfig.class})
 public class Application {
 
     public static void main(String args[]){

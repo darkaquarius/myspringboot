@@ -1,0 +1,27 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: shenhui
+      password: Cc3877574987
+      database: test
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    pool:
+      max-active: 50
+    database: 1
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/test_db?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&useAffectedRows=true
+      username: root
+      password: Cc3877574987
+      maximum-pool-size: 50
+      driver-class-name: com.mysql.jdbc.Driver
+mail:
+  host: smtp.163.com
+#  port:465
+  port: 25
+  username: darkaquarius88@163.com
+  password: c3877574987
